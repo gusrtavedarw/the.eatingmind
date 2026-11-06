@@ -1,0 +1,4 @@
+interface:
+  display_name: "먹는마음 대본"
+  short_description: "먹는 행동의 심리·뇌과학을 생활 장면에서 풀어내는 교양 대본"
+  default_prompt: "$eating-mind-script로 이 주제를 먹는마음 채널의 7단계 구조에 맞춰 기획하고 대본을 써줘."
