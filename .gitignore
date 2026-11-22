@@ -9,3 +9,13 @@ production/visual-cues/v4/cuts/*.png
 production/visual-cues/v4/cuts/*.log
 production/visual-cues/v4/cuts/*.check.txt
 production/visual-cues/v4/review/img/
+# 1분 시험 영상(HyperFrames): 그림·음성·음원·글꼴 자산과 렌더 결과는 올리지 않는다(Pixabay 음원·본인 목소리 포함). 코드만 올림
+production/visual-cues/v4/video/assets/
+production/visual-cues/v4/video/renders/
+production/visual-cues/v4/video/snapshots/
+production/visual-cues/v4/video/node_modules/
+production/visual-cues/v4/video/AGENTS.md
+production/visual-cues/v4/video/CLAUDE.md
+production/visual-cues/v4/video/.hyperframes/
+production/visual-cues/v4/video/.thumbnails/
+production/visual-cues/v4/video/.waveform-cache/
