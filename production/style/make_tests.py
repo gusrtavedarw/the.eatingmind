@@ -67,6 +67,7 @@ def job(name):
     with open(os.path.join(OUT, f"{name}.log"), "w") as f: f.write(r.stdout + r.stderr)
     return f"{name}: {'ok' if r.returncode == 0 and os.path.exists(out) else 'FAIL (see .log)'}"
 
-names = sys.argv[1:] or [s + "a" for s in SCENES] + ["paper"]
-with ThreadPoolExecutor(3) as ex:
-    for line in ex.map(job, names): print(line, flush=True)
+if __name__ == "__main__":  # production/visual-cues/v4/make_cuts.py가 위 문구를 가져다 쓴다
+    names = sys.argv[1:] or [s + "a" for s in SCENES] + ["paper"]
+    with ThreadPoolExecutor(3) as ex:
+        for line in ex.map(job, names): print(line, flush=True)
