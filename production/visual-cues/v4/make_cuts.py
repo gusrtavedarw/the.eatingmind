@@ -107,6 +107,58 @@ CUTS = {
   "Subject (the closing still life): an empty soup bowl with a spoon laid down beside it, placed in the LEFT half of the plate. The bowl is empty except for one thin trace "
   "of soup along the inside bottom; that thin trace is the only vermilion. The whole RIGHT half of the plate is empty cream paper (end-screen elements will go there). No people.",
   "- one empty soup bowl with a spoon beside it, in the left half\n- the right half of the image is empty paper\n- only a thin trace of soup in the bowl is vermilion\n- no people"),
+ "C02": ("C02 다시 넣는 손", FULL, ["C01"],
+  "Scene (opening, the same night as the FIRST reference image): keep the same fallen foil snack bag on the same low coffee table, the same living room and the same cold TV light "
+  "from outside the frame on the left. The last snack piece is gone: the bag is empty. A bare adult right hand and forearm (the same kind of hand as in the scene reference) "
+  "enters from the right edge of the frame and reaches into the bag's open mouth, fingertips just disappearing into the dark inside; only the back of the hand and the forearm "
+  "are visible, the body is out of frame. A few tiny crumbs cling to the edge of the bag's mouth; those crumbs are the only vermilion.",
+  "- the same kind of fallen foil snack bag, now empty\n- exactly one hand: a bare right forearm and hand entering from the right edge and reaching into the bag's mouth "
+  "(the body outside the frame is expected)\n- only a few tiny crumbs at the bag's mouth are vermilion; no whole snack pieces"),
+ "C03": ("C03 봉지 안 손끝", FULL, ["C01"],
+  "Scene (inside the bag): a view from INSIDE the dark foil snack bag of the FIRST reference image, looking toward its open mouth, which shows only as a pale opening of cold light: "
+  "nothing of the room is visible through it (no TV, no screen, no furniture, no plants, no window), just soft bright light. "
+  "Crinkled foil walls fill the frame in dense cross-hatching. The index and middle fingertips of one bare adult right hand come in through the mouth and touch the foil floor. "
+  "There is nothing on the floor but a few tiny crumbs next to the fingertips; those crumbs are the only vermilion. No whole snack pieces.",
+  "- a view from inside a foil bag toward its open mouth\n- the fingertips of one hand come in through the mouth and touch the bottom (only part of one hand is visible, which is expected)\n"
+  "- only a few tiny crumbs are vermilion; no whole snack pieces"),
+ "C04": ("C04 멈춘 손", FULL, ["C01"],
+  "Scene (the hand stops): the same night living room and the same empty fallen foil bag on the low coffee table as in the FIRST reference image. A bare adult right hand, just pulled "
+  "out of the bag, hangs still in the air above the table near the bag's mouth, fingers slightly curled and empty; it enters from the right edge with its forearm and the body is "
+  "out of frame. A few tiny crumbs stick to the fingertips; those crumbs are the only vermilion. Calm, suspended stillness.",
+  "- exactly one bare right hand and forearm from the right edge, empty, held still in the air above the table\n- the empty foil bag lies on the table\n"
+  "- only tiny crumbs on the fingertips are vermilion"),
+ "C05": ("C05 위에서 본 탁자", FULL, ["C01"],
+  "Scene (looking down): a top-down view of the same low coffee table at night as in the FIRST reference image. The empty foil snack bag lies flattened on the table with crumbs "
+  "scattered around it. The corner of a TV remote control just enters the edge of the frame. Cold TV light from one side falls across the table surface. No people, no hands. "
+  "The scattered crumbs are the only vermilion.",
+  "- a top-down view of a table with a flattened empty foil bag and scattered crumbs\n- the corner of a remote control at the frame edge\n- no people or hands\n- only the crumbs are vermilion"),
+ "C06": ("C06 같은 자리로 가는 손", FULL, ["C01"],
+  "Scene (the repeated reach, an engraved motion study): the same night table and the same foil snack bag as in the FIRST reference image, seen close. Three or four ghost repetitions "
+  "of the SAME bare right hand and forearm, drawn as fine, faint hatched outlines at slightly different positions like a printed motion study, all reach in from the right edge and "
+  "converge on one point: the bag's mouth. Only the frontmost repetition is drawn fully; the others are lighter echoes made of thin lines. At the bag's mouth a single snack piece "
+  "of the same twisted shape is the only vermilion.",
+  "- three or four faint, intentional ghost repetitions of the same right hand reaching toward the bag's mouth (an intended motion trail of one hand, not extra people)\n"
+  "- the repetitions come from the right edge and converge on the bag's mouth\n- only one twisted snack piece at the bag's mouth is vermilion"),
+ "C07": ("C07 조금 더 남은 봉지", OBJ, [],
+  "Subject (what if a little more were left?): a plain crinkled foil snack bag (no printing) lying alone on its side on plain cream paper like a specimen plate, its open mouth "
+  "toward the viewer, with about one third of its twisted puffed snack pieces (the same twisted shape as in the scene reference) still inside and visible through the mouth. "
+  "Keep the bag small enough that the bag and its shadow stay entirely in the upper two thirds of the image. "
+  "No table, no room, no hands, no people. The snack pieces inside the bag are the only vermilion.",
+  "- one foil snack bag lying on its side on plain paper, about one third full of snack pieces visible at the mouth\n- no people or hands\n- only the snack pieces are vermilion"),
+ "C08": ("C08 멈춘 손(종이 위)", OBJ, [],
+  "Subject (would the hand stop?): on plain cream paper like a specimen plate, a plain foil snack bag lies on its side with about one third of its twisted snack pieces visible "
+  "at the open mouth. Above the mouth, one bare adult right hand hovers, paused, fingers slightly open, not touching anything; its forearm runs to the right edge of the image. "
+  "Nothing else: no table, no room. The snack pieces at the bag's mouth are the only vermilion.",
+  "- a foil bag with snack pieces at its mouth on plain paper\n- exactly one bare right hand hovering above the mouth, its forearm running to the right edge\n- only the snack pieces are vermilion"),
+ "C09": ("C09 한 조각 집기", OBJ, [],
+  "Subject (one more piece): a close-up specimen plate on plain cream paper: the thumb and index finger of one bare adult right hand pick up one twisted snack piece and lift it "
+  "slightly into the air; the hand comes in from the right edge. A few crumbs lie below. Nothing else. The lifted snack piece is the only vermilion.",
+  "- one hand's thumb and index finger holding one twisted snack piece in the air (the rest of the hand and arm toward the right edge)\n- only that snack piece is vermilion\n"
+  "- no other people or hands"),
+ "C10": ("C10 첫 인사 정물", OBJ, [],
+  "Subject (the greeting still life): on plain cream paper, an empty plain foil snack bag, half folded over and lying flat, with a few crumbs scattered around it, like a quiet "
+  "still-life specimen plate. No hands, no people. The few crumbs are the only vermilion.",
+  "- an empty, half-folded foil bag lying flat on plain paper\n- a few scattered crumbs, the only vermilion\n- no people or hands"),
 }
 
 
@@ -134,7 +186,7 @@ def job(name):
 
 
 def compare():
-    names = [n for n in CUTS if os.path.exists(path(n, "_paper.png"))]
+    names = sorted(n for n in CUTS if os.path.exists(path(n, "_paper.png")))
     tw, th, band, gap, cols = 768, 432, 48, 16, 2
     rows = (len(names) + cols - 1) // cols
     sheet = Image.new("RGB", (gap + cols * (tw + gap), gap + rows * (band + th + gap)), "white")
@@ -149,7 +201,7 @@ def compare():
 
 if __name__ == "__main__":
     names = sys.argv[1:] or list(CUTS)
-    first = [n for n in names if not any(r in CUTS for r in CUTS[n][2])]  # 다른 컷을 참조하지 않는 컷부터 함께 그린다
+    first = [n for n in names if not any(r in names for r in CUTS[n][2])]  # 이번에 함께 그리는 컷을 참조하지 않는 컷부터 함께 그린다
     with ThreadPoolExecutor(3) as ex:
         for line in ex.map(job, first): print(line, flush=True)
     for n in names:
