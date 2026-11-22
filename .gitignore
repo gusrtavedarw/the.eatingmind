@@ -1,0 +1,5 @@
+# 그림체 시험: 낱장 그림·로그·검수 결과는 올리지 않는다(판마다 비교 화면과 프롬프트만 올림)
+production/style/tests/**/*.png
+!production/style/tests/*/compare.png
+production/style/tests/**/*.log
+production/style/tests/**/*.check.txt
