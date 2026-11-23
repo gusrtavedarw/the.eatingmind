@@ -1,0 +1,36 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    .pic { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+    .pic img { display: block; width: 1920px; height: 1080px; object-fit: cover; }
+  </style>
+  <div id="root" data-composition-id="pictures" data-width="1920" data-height="1080">
+    <div id="p-C01" class="clip pic" data-start="0.000" data-duration="4.759" data-track-index="1" style="z-index:1"><img id="img-C01" src="assets/img/C01.jpg" alt="C01"></div>
+    <div id="p-C02" class="clip pic" data-start="4.759" data-duration="2.282" data-track-index="1" style="z-index:2"><img id="img-C02" src="assets/img/C02.jpg" alt="C02"></div>
+    <div id="p-C03" class="clip pic" data-start="7.041" data-duration="1.827" data-track-index="1" style="z-index:3"><img id="img-C03" src="assets/img/C03.jpg" alt="C03"></div>
+    <div id="p-C04" class="clip pic" data-start="8.868" data-duration="2.000" data-track-index="1" style="z-index:4"><img id="img-C04" src="assets/img/C04.jpg" alt="C04"></div>
+    <div id="p-C05" class="clip pic" data-start="10.868" data-duration="11.526" data-track-index="1" style="z-index:5"><img id="img-C05" src="assets/img/C05.jpg" alt="C05"></div>
+    <div id="p-C06" class="clip pic" data-start="22.394" data-duration="9.031" data-track-index="1" style="z-index:6"><img id="img-C06" src="assets/img/C06.jpg" alt="C06"></div>
+    <div id="p-C07" class="clip pic" data-start="30.825" data-duration="2.911" data-track-index="1" style="z-index:7"><img id="img-C07" src="assets/img/C07.jpg" alt="C07"></div>
+    <div id="p-C08" class="clip pic" data-start="33.736" data-duration="2.979" data-track-index="1" style="z-index:8"><img id="img-C08" src="assets/img/C08.jpg" alt="C08"></div>
+    <div id="p-C09" class="clip pic" data-start="36.715" data-duration="5.474" data-track-index="1" style="z-index:9"><img id="img-C09" src="assets/img/C09.jpg" alt="C09"></div>
+    <div id="p-C10" class="clip pic" data-start="42.188" data-duration="6.165" data-track-index="1" style="z-index:10"><img id="img-C10" src="assets/img/C10.jpg" alt="C10"></div>
+    <div id="p-C11" class="clip pic" data-start="48.353" data-duration="10.422" data-track-index="1" style="z-index:11"><img id="img-C11" src="assets/img/C11.jpg" alt="C11"></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#img-C01", { scale: 1 }, { scale: 1.035, duration: 4.759, ease: "none" }, 0.000);
+    tl.fromTo("#img-C01", { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "none" }, 0);
+    tl.fromTo("#img-C02", { scale: 1 }, { scale: 1.04, duration: 2.282, ease: "none" }, 4.759);
+    tl.fromTo("#img-C03", { scale: 1 }, { scale: 1.025, duration: 1.827, ease: "none" }, 7.041);
+    tl.fromTo("#img-C05", { scale: 1.040, xPercent: 2.00 }, { scale: 1.040, xPercent: -2.00, duration: 11.526, ease: "none" }, 10.868);
+    tl.fromTo("#img-C06", { scale: 1 }, { scale: 1.04, duration: 9.031, ease: "none" }, 22.394);
+    tl.fromTo("#img-C07", { scale: 1 }, { scale: 1.012, duration: 2.911, ease: "none" }, 30.825);
+    tl.fromTo("#img-C07", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "none" }, 30.825);
+    tl.fromTo("#img-C09", { scale: 1 }, { scale: 1.025, duration: 5.474, ease: "none" }, 36.715);
+    tl.fromTo("#img-C10", { scale: 1 }, { scale: 1.015, duration: 6.165, ease: "none" }, 42.188);
+    tl.fromTo("#img-C11", { scale: 1.050, xPercent: 2.50 }, { scale: 1.050, xPercent: -2.50, duration: 10.422, ease: "none" }, 48.353);
+    tl.fromTo("#img-C11", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "none" }, 57.935);
+    window.__timelines["pictures"] = tl;
+  </script>
+</template>

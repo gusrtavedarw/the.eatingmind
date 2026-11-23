@@ -1,0 +1,91 @@
+<template>
+  <style>
+    @font-face { font-family: "Pretendard"; src: url('assets/fonts/Pretendard-Medium.otf'); font-weight: 500; }
+    #root { position: absolute; inset: 0; }
+    .cap { position: absolute; left: 0; right: 0; bottom: 96px; text-align: center; overflow: visible; }
+    .cap-t {
+      display: inline-block; max-width: 1560px; padding: 10px 30px 13px; border-radius: 6px;
+      background: rgba(18, 16, 14, 0.62); color: #F3EBDD;
+      font-family: "Pretendard", sans-serif; font-weight: 500; font-size: 54px; line-height: 1.38; letter-spacing: -0.01em;
+      word-break: keep-all;
+    }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
+    <div id="cap-00" class="clip cap" data-start="0.980" data-duration="3.490" data-track-index="2"><span id="cap-00-t" class="cap-t">봉지의 마지막 남은 과자를 집었을 때, 깜짝 놀랐습니다</span></div>
+    <div id="cap-01" class="clip cap" data-start="4.739" data-duration="2.212" data-track-index="2"><span id="cap-01-t" class="cap-t">혹시나 하고 한 번 더 손을 넣어보지만</span></div>
+    <div id="cap-02" class="clip cap" data-start="6.971" data-duration="1.810" data-track-index="2"><span id="cap-02-t" class="cap-t">역시나 다 먹었습니다</span></div>
+    <div id="cap-03" class="clip cap" data-start="11.248" data-duration="2.064" data-track-index="2"><span id="cap-03-t" class="cap-t">별로 좋아하지 않는 과자인 데다</span></div>
+    <div id="cap-04" class="clip cap" data-start="13.332" data-duration="4.356" data-track-index="2"><span id="cap-04-t" class="cap-t">누군가 먹다 놔둔 과자라서 첫 입은 조금 눅눅한 맛이었던 것 같습니다</span></div>
+    <div id="cap-05" class="clip cap" data-start="18.288" data-duration="3.710" data-track-index="2"><span id="cap-05-t" class="cap-t">솔직히 그다음부터는 무슨 맛인지 잘 기억이 나지 않습니다</span></div>
+    <div id="cap-06" class="clip cap" data-start="22.364" data-duration="1.870" data-track-index="2"><span id="cap-06-t" class="cap-t">그렇게 맛있지도 않았는데</span></div>
+    <div id="cap-07" class="clip cap" data-start="24.274" data-duration="2.790" data-track-index="2"><span id="cap-07-t" class="cap-t">그만 먹겠다는 생각 자체가 나지 않았습니다</span></div>
+    <div id="cap-08" class="clip cap" data-start="27.604" data-duration="2.840" data-track-index="2"><span id="cap-08-t" class="cap-t">기계적으로 과자를 집어 먹었던 것 같습니다</span></div>
+    <div id="cap-09" class="clip cap" data-start="31.415" data-duration="2.281" data-track-index="2"><span id="cap-09-t" class="cap-t">봉지에 과자가 조금 더 남아 있었다면</span></div>
+    <div id="cap-10" class="clip cap" data-start="33.716" data-duration="2.210" data-track-index="2"><span id="cap-10-t" class="cap-t">같은 순간에 손을 멈췄을까요?</span></div>
+    <div id="cap-11" class="clip cap" data-start="37.055" data-duration="1.880" data-track-index="2"><span id="cap-11-t" class="cap-t">아니면 계속 집어먹었을까요?</span></div>
+    <div id="cap-12" class="clip cap" data-start="39.465" data-duration="2.140" data-track-index="2"><span id="cap-12-t" class="cap-t">그렇게 맛있지도 않았는데 말이죠…</span></div>
+    <div id="cap-13" class="clip cap" data-start="42.178" data-duration="2.590" data-track-index="2"><span id="cap-13-t" class="cap-t">먹는 마음을 이해하고, 나를 돌보는 지식</span></div>
+    <div id="cap-14" class="clip cap" data-start="45.438" data-duration="2.530" data-track-index="2"><span id="cap-14-t" class="cap-t">안녕하세요, 먹는마음의 구스타브입니다</span></div>
+    <div id="cap-15" class="clip cap" data-start="48.333" data-duration="2.930" data-track-index="2"><span id="cap-15-t" class="cap-t">오늘은 그 질문에서 한 가지를 살펴보겠습니다</span></div>
+    <div id="cap-16" class="clip cap" data-start="51.783" data-duration="2.010" data-track-index="2"><span id="cap-16-t" class="cap-t">먹은 만큼 음식이 줄어드는 모습</span></div>
+    <div id="cap-17" class="clip cap" data-start="54.313" data-duration="3.170" data-track-index="2"><span id="cap-17-t" class="cap-t">그 모습이 달라지면, 우리가 먹는 양도 달라질까요?</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#cap-00-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 0.980);
+    tl.to("#cap-00-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 4.350);
+    tl.set("#cap-00-t", { opacity: 0, visibility: "hidden" }, 4.470);
+    tl.fromTo("#cap-01-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 4.739);
+    tl.to("#cap-01-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 6.831);
+    tl.set("#cap-01-t", { opacity: 0, visibility: "hidden" }, 6.951);
+    tl.fromTo("#cap-02-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 6.971);
+    tl.to("#cap-02-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 8.661);
+    tl.set("#cap-02-t", { opacity: 0, visibility: "hidden" }, 8.781);
+    tl.fromTo("#cap-03-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 11.248);
+    tl.to("#cap-03-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 13.192);
+    tl.set("#cap-03-t", { opacity: 0, visibility: "hidden" }, 13.312);
+    tl.fromTo("#cap-04-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 13.332);
+    tl.to("#cap-04-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 17.568);
+    tl.set("#cap-04-t", { opacity: 0, visibility: "hidden" }, 17.688);
+    tl.fromTo("#cap-05-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 18.288);
+    tl.to("#cap-05-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 21.878);
+    tl.set("#cap-05-t", { opacity: 0, visibility: "hidden" }, 21.998);
+    tl.fromTo("#cap-06-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 22.364);
+    tl.to("#cap-06-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 24.114);
+    tl.set("#cap-06-t", { opacity: 0, visibility: "hidden" }, 24.234);
+    tl.fromTo("#cap-07-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 24.274);
+    tl.to("#cap-07-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 26.944);
+    tl.set("#cap-07-t", { opacity: 0, visibility: "hidden" }, 27.064);
+    tl.fromTo("#cap-08-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 27.604);
+    tl.to("#cap-08-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 30.324);
+    tl.set("#cap-08-t", { opacity: 0, visibility: "hidden" }, 30.444);
+    tl.fromTo("#cap-09-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 31.415);
+    tl.to("#cap-09-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 33.576);
+    tl.set("#cap-09-t", { opacity: 0, visibility: "hidden" }, 33.696);
+    tl.fromTo("#cap-10-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 33.716);
+    tl.to("#cap-10-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 35.806);
+    tl.set("#cap-10-t", { opacity: 0, visibility: "hidden" }, 35.926);
+    tl.fromTo("#cap-11-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 37.055);
+    tl.to("#cap-11-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 38.815);
+    tl.set("#cap-11-t", { opacity: 0, visibility: "hidden" }, 38.935);
+    tl.fromTo("#cap-12-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 39.465);
+    tl.to("#cap-12-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 41.485);
+    tl.set("#cap-12-t", { opacity: 0, visibility: "hidden" }, 41.605);
+    tl.fromTo("#cap-13-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 42.178);
+    tl.to("#cap-13-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 44.648);
+    tl.set("#cap-13-t", { opacity: 0, visibility: "hidden" }, 44.768);
+    tl.fromTo("#cap-14-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 45.438);
+    tl.to("#cap-14-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 47.848);
+    tl.set("#cap-14-t", { opacity: 0, visibility: "hidden" }, 47.968);
+    tl.fromTo("#cap-15-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 48.333);
+    tl.to("#cap-15-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 51.143);
+    tl.set("#cap-15-t", { opacity: 0, visibility: "hidden" }, 51.263);
+    tl.fromTo("#cap-16-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 51.783);
+    tl.to("#cap-16-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 53.673);
+    tl.set("#cap-16-t", { opacity: 0, visibility: "hidden" }, 53.793);
+    tl.fromTo("#cap-17-t", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 54.313);
+    tl.to("#cap-17-t", { opacity: 0, duration: 0.12, ease: "power2.in" }, 57.363);
+    tl.set("#cap-17-t", { opacity: 0, visibility: "hidden" }, 57.483);
+    window.__timelines["captions"] = tl;
+  </script>
+</template>

@@ -1,0 +1,408 @@
+<title>수프·팝콘 편 콘티</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<!-- 먹는마음 수프·팝콘 편 콘티 검토 페이지. 데이터는 같은 폴더의 conti.json(make_conti.py가 만듦), 검토 표시는 db의 reviews/<컷> 문서. -->
+<style>
+/* 레이아웃: 콘티 시트. 위에 전체 길이 시간 막대(컷마다 한 칸, 검토 상태 색)와 구간 목차, 아래로 구간별 컷 행: 왼쪽 16:9 그림 칸, 오른쪽 읽는 문장·컷 정보·검토 표시 */
+:root {
+  --bg: #F2F1EE; --surface: #FBFAF8; --ink: #1B1A18; --muted: #68645C; --line: #DAD6CD;
+  --paper: #EEE6D3; --paper-ink: #4A4436;
+  --verm: #C4402A; --verm-soft: #F4DCD5; --ok: #3B6A4E; --ok-soft: #D8E7DD; --todo: #CDC8BE;
+  --on-accent: #FBFAF8;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --f-line: "Gowun Batang", "AppleMyungjo", "Noto Serif KR", serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151513; --surface: #1D1C1A; --ink: #ECE9E2; --muted: #A39E94; --line: #35332E;
+    --paper: #2B2822; --paper-ink: #D8D0BE;
+    --verm: #E5664A; --verm-soft: #4A2620; --ok: #84B494; --ok-soft: #22352A; --todo: #403D37;
+    --on-accent: #151513; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151513; --surface: #1D1C1A; --ink: #ECE9E2; --muted: #A39E94; --line: #35332E;
+  --paper: #2B2822; --paper-ink: #D8D0BE;
+  --verm: #E5664A; --verm-soft: #4A2620; --ok: #84B494; --ok-soft: #22352A; --todo: #403D37;
+  --on-accent: #151513; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+:focus-visible { outline: 2px solid var(--verm); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+code { font-family: var(--f-mono); font-size: .88em; }
+
+header.top { padding-block: 40px 8px; display: grid; gap: 10px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+h1 { font-family: var(--f-line); font-weight: 700; font-size: clamp(28px, 4vw, 38px); line-height: 1.2; margin: 0; text-wrap: balance; }
+.facts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; font-size: 14px; color: var(--muted); }
+.facts b { font-family: var(--f-mono); font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+.how { max-width: 65ch; margin: 0; color: var(--muted); font-size: 14px; }
+
+.timeline { margin-top: 24px; }
+.bar { display: flex; gap: 4px; height: 44px; }
+.bar .sec { display: flex; gap: 1px; min-width: 0; }
+.bar a { display: block; min-width: 0; background: var(--todo); border-radius: 1px; }
+.bar a.ok { background: var(--ok); }
+.bar a.fix { background: var(--verm); }
+.bar a.drawn { box-shadow: inset 0 -6px 0 var(--ink); }
+.bar a:hover { opacity: .7; }
+.scale { position: relative; height: 20px; margin-top: 4px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.scale span { position: absolute; top: 0; transform: translateX(-50%); }
+.scale span:first-child { transform: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 1px; margin-right: 6px; vertical-align: -1px; background: var(--todo); }
+.legend i.ok { background: var(--ok); } .legend i.fix { background: var(--verm); }
+.legend i.drawn { background: var(--todo); box-shadow: inset 0 -4px 0 var(--ink); }
+
+.index { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); margin-top: 20px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.index a { display: grid; gap: 2px; padding: 10px 12px; background: var(--surface); color: inherit; text-decoration: none; min-width: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.index a:hover { background: var(--bg); }
+.index .nm { font-weight: 500; font-size: 14px; }
+.index .tm { font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.index .tm em { font-style: normal; color: var(--verm); }
+.note { font-size: 13px; color: var(--muted); margin: 10px 0 0; max-width: 65ch; }
+
+details.rules { margin-top: 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.rules summary { cursor: pointer; padding-block: 12px; font-weight: 500; }
+.tablebox { overflow-x: auto; padding-bottom: 16px; }
+.tablebox table { border-collapse: collapse; font-size: 14px; min-width: 560px; }
+.tablebox th, .tablebox td { text-align: left; vertical-align: top; padding: 8px 12px 8px 0; border-top: 1px solid var(--line); }
+.tablebox th { white-space: nowrap; font-weight: 500; color: var(--muted); width: 8em; }
+
+.toolbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-block: 12px; margin-top: 24px; border-bottom: 1px solid var(--line);
+}
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button {
+  font: 500 13px var(--f-body); padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.filters button span { font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--muted); margin-left: 4px; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters button[aria-pressed="true"] span { color: inherit; opacity: .75; }
+.dbnote { font-size: 13px; color: var(--muted); }
+
+section.part { scroll-margin-top: 72px; }
+.part h2 { font-family: var(--f-line); font-weight: 700; font-size: 22px; margin: 40px 0 0; text-wrap: balance; }
+.part .pmeta { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin: 2px 0 4px; font-variant-numeric: tabular-nums; }
+
+.cut {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px; align-items: start;
+  padding-block: 22px; border-top: 1px solid var(--line); scroll-margin-top: 72px;
+}
+@media (max-width: 760px) { .cut { grid-template-columns: minmax(0, 1fr); gap: 14px; } }
+.frame { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--paper); border-radius: 2px; }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+.slate {
+  position: absolute; top: 8px; left: 8px; font-family: var(--f-mono); font-size: 12px; font-weight: 500;
+  background: var(--surface); color: var(--ink); padding: 1px 7px; border-radius: 2px;
+}
+.frame.blank { padding: 14px 16px; color: var(--paper-ink); font-size: 13.5px; line-height: 1.6; display: grid; align-content: start; gap: 6px; }
+.frame.blank .slate { position: static; justify-self: start; }
+.frame.blank .lbl { font-size: 11px; letter-spacing: .06em; opacity: .75; }
+.frame.blank p { margin: 0; }
+.cut[data-status="fix"] .frame { outline: 3px solid var(--verm); outline-offset: 3px; }
+
+.cbody { display: grid; gap: 12px; min-width: 0; }
+.tc { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pill { font-family: var(--f-body); font-size: 12px; font-weight: 500; padding: 0 8px; border-radius: 999px; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.fix { background: var(--verm-soft); color: var(--verm); }
+.line { font-family: var(--f-line); font-size: 19px; line-height: 1.65; margin: 0; max-width: 34em; }
+.line.silent { color: var(--muted); font-size: 16px; }
+dl.meta { display: grid; grid-template-columns: 5.6em minmax(0, 1fr); gap: 4px 12px; margin: 0; font-size: 14px; }
+dl.meta dt { color: var(--muted); font-size: 13px; }
+dl.meta dd { margin: 0; }
+dd.accent::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--verm); margin-right: 7px; vertical-align: 0; }
+
+.review { display: grid; gap: 8px; padding-top: 4px; }
+.seg { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.seg button {
+  font: 500 14px var(--f-body); padding: 6px 16px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.seg button[data-s="ok"][aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: var(--on-accent); }
+.seg button[data-s="fix"][aria-pressed="true"] { background: var(--verm); border-color: var(--verm); color: var(--on-accent); }
+.seg button:disabled { cursor: default; opacity: .55; }
+.save { font-size: 12px; color: var(--muted); }
+.review textarea {
+  width: 100%; min-height: 64px; resize: vertical; box-sizing: border-box; padding: 8px 10px; border-radius: 4px;
+  font: 14px/1.55 var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.review textarea::placeholder { color: var(--muted); }
+.review textarea[readonly] { opacity: .7; }
+.empty { padding-block: 40px; color: var(--muted); text-align: center; }
+.err { padding-block: 40px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">먹는마음 · 화면 콘티 검토</div>
+    <h1>수프·팝콘 편 콘티</h1>
+    <p class="facts" id="facts">콘티를 불러오는 중입니다.</p>
+    <p class="how">컷마다 그림 칸과 읽는 문장을 보고 <b>좋음</b> 또는 <b>고칠 것</b>을 고른 뒤, 고칠 점을 메모로 남겨 주세요. 표시와 메모는 바로 저장되고, Claude가 읽어 콘티에 반영합니다. 시간은 녹음 전 예상치입니다.</p>
+  </header>
+
+  <div class="timeline" aria-label="전체 시간 막대">
+    <div class="bar" id="bar"></div>
+    <div class="scale" id="scale"></div>
+    <div class="legend"><span><i></i>안 본 컷</span><span><i class="ok"></i>좋음</span><span><i class="fix"></i>고칠 것</span><span><i class="drawn"></i>그림 있음(아래 줄)</span></div>
+  </div>
+  <nav class="index" id="index" aria-label="구간 목차"></nav>
+  <p class="note" id="note"></p>
+
+  <details class="rules" id="rules">
+    <summary>정한 것</summary>
+    <div class="tablebox"><table><tbody id="rulesBody"></tbody></table></div>
+  </details>
+
+  <div class="toolbar">
+    <div class="filters" role="group" aria-label="컷 거르기">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">전체<span id="n-all">0</span></button>
+      <button type="button" id="f-todo" data-f="todo" aria-pressed="false">안 본 컷<span id="n-todo">0</span></button>
+      <button type="button" id="f-fix" data-f="fix" aria-pressed="false">고칠 것<span id="n-fix">0</span></button>
+      <button type="button" id="f-ok" data-f="ok" aria-pressed="false">좋음<span id="n-ok">0</span></button>
+    </div>
+    <span class="dbnote" id="dbnote">검토 기록을 불러오는 중입니다.</span>
+  </div>
+
+  <main id="cuts"></main>
+  <p class="empty" id="empty" hidden>이 조건에 맞는 컷이 없습니다.</p>
+</div>
+
+<script>
+const S = { data: null, cuts: new Map(), reviews: new Map(), filter: "all", db: null, canWrite: false,
+            dirty: new Set(), timers: new Map(), queues: new Map() };
+const $ = (id) => document.getElementById(id);
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function rich(text) {  // 콘티 글의 **굵게**, `코드`만 살린다
+  const f = document.createDocumentFragment();
+  for (const part of String(text).split(/(\*\*[^*]+\*\*|`[^`]+`)/)) {
+    if (!part) continue;
+    if (part.startsWith("**")) f.append(el("strong", null, part.slice(2, -2)));
+    else if (part.startsWith("`")) f.append(el("code", null, part.slice(1, -1)));
+    else f.append(document.createTextNode(part));
+  }
+  return f;
+}
+const mmss = (x) => { x = Math.round(x); return `${Math.floor(x / 60)}:${String(x % 60).padStart(2, "0")}`; };
+const statusOf = (id) => (S.reviews.get(id) || {}).status || "";
+
+function render(d) {
+  const facts = $("facts"); facts.textContent = "";
+  for (const [a, v, b] of [["", d.cuts, "컷"], ["약 ", d.total_mmss, ` (마지막 화면 ${d.end_screen}초 포함)`], ["컷 평균 ", d.avg.toFixed(1), "초"],
+                           ["화면 가득 ", d.full, ""], ["종이 위 오브제 ", d.obj, ""], ["그린 컷 ", d.drawn.length, ""]]) {
+    const s = el("span"); s.append(a, el("b", null, String(v)), b); facts.append(s);
+  }
+  $("n-all").textContent = d.cuts;
+
+  // 시간 막대: 구간마다 한 묶음, 컷마다 한 칸(길이 비례)
+  const bar = $("bar");
+  d.sections.forEach((sec, i) => {
+    const g = el("div", "sec"); g.style.flex = `${sec.secs} 1 0`;
+    for (const c of sec.cuts) {
+      const a = el("a"); a.href = "#" + c.id; a.style.flex = `${c.dur} 1 0`; a.dataset.id = c.id;
+      a.title = `${c.id} ${c.start}–${c.end} · ${sec.name}`; a.setAttribute("aria-label", a.title);
+      if (c.img) a.classList.add("drawn");
+      g.append(a);
+    }
+    bar.append(g);
+  });
+  const scale = $("scale");
+  for (let m = 0; m * 60 <= d.total; m++) { const s = el("span", null, `${m}:00`); s.style.left = `${(m * 60 / d.total) * 100}%`; scale.append(s); }
+
+  const index = $("index");
+  d.sections.forEach((sec, i) => {
+    const a = el("a"); a.href = `#part-${i + 1}`;
+    a.append(el("span", "nm", sec.name));
+    const tm = el("span", "tm", `${sec.start}–${sec.end} · ${sec.cuts.length}컷`); const em = el("em"); em.id = `ix-fix-${i + 1}`; tm.append(em);
+    a.append(tm); index.append(a);
+  });
+  $("note").textContent = d.note;
+
+  const rb = $("rulesBody");
+  for (const [k, v] of d.rules) { const tr = el("tr"); tr.append(el("th", null, k)); const td = el("td"); td.append(rich(v)); tr.append(td); rb.append(tr); }
+  $("rules").querySelector("summary").textContent = `정한 것 (${d.rules.length}가지)`;
+
+  const main = $("cuts");
+  d.sections.forEach((sec, i) => {
+    const part = el("section", "part"); part.id = `part-${i + 1}`;
+    part.append(el("h2", null, sec.name), el("p", "pmeta", `${sec.start}–${sec.end} · ${Math.round(sec.secs)}초 · ${sec.cuts.length}컷`));
+    for (const c of sec.cuts) { S.cuts.set(c.id, c); part.append(renderCut(c)); }
+    main.append(part);
+  });
+}
+
+function renderCut(c) {
+  const art = el("article", "cut"); art.id = c.id; art.dataset.status = "";
+  const frame = el("div", c.img ? "frame" : "frame blank");
+  if (c.img) {
+    const img = el("img"); img.src = c.img; img.alt = `${c.id} 그림: ${c.pic.replace(/`/g, "")}`; img.loading = "lazy";
+    frame.append(img, el("span", "slate", c.id));
+  } else {
+    frame.append(el("span", "slate", c.id), el("span", "lbl", `그림 설명 · ${c.comp}`));
+    const p = el("p"); p.append(rich(c.pic)); frame.append(p);
+  }
+
+  const body = el("div", "cbody");
+  const tc = el("div", "tc"); tc.append(el("span", null, `${c.start}–${c.end}`), el("span", null, `${c.dur.toFixed(1)}초`));
+  const pill = el("span", "pill"); pill.hidden = true; tc.append(pill);
+  body.append(tc);
+  body.append(c.text ? el("p", "line", c.text) : el("p", "line silent", "(읽지 않음 · 마지막 화면)"));
+
+  const dl = el("dl", "meta");
+  const row = (k, v, cls) => { if (!v) return; const dd = el("dd", cls); dd.append(rich(v)); dl.append(el("dt", null, k), dd); };
+  if (c.img) row("그림", c.pic);
+  row("구성", c.comp); row("주홍", c.accent, "accent"); row("움직임·전환", c.motion); row("소리", c.sound); row("화면 글자", c.screen);
+  body.append(dl);
+
+  const rv = el("div", "review");
+  const seg = el("div", "seg");
+  for (const [s, label] of [["ok", "좋음"], ["fix", "고칠 것"]]) {
+    const b = el("button", null, label); b.type = "button"; b.dataset.s = s; b.id = `${c.id}-${s}`; b.setAttribute("aria-pressed", "false"); b.disabled = true;
+    b.addEventListener("click", () => setStatus(c.id, statusOf(c.id) === s ? "" : s));
+    seg.append(b);
+  }
+  const save = el("span", "save"); save.id = `save-${c.id}`; seg.append(save);
+  const memo = el("textarea"); memo.id = `memo-${c.id}`; memo.rows = 2; memo.readOnly = true;
+  memo.placeholder = "고칠 점이나 의견을 적어 주세요"; memo.setAttribute("aria-label", `${c.id} 메모`);
+  memo.addEventListener("input", () => onMemo(c.id, memo.value));
+  memo.addEventListener("blur", () => flushMemo(c.id, true));
+  rv.append(seg, memo);
+  body.append(rv);
+
+  art.append(frame, body);
+  return art;
+}
+
+function applyOne(id) {
+  const st = statusOf(id), art = $(id);
+  art.dataset.status = st;
+  for (const s of ["ok", "fix"]) $(`${id}-${s}`).setAttribute("aria-pressed", String(st === s));
+  const pill = art.querySelector(".pill");
+  pill.hidden = !st; pill.className = `pill ${st}`; pill.textContent = st === "ok" ? "좋음" : st === "fix" ? "고칠 것" : "";
+  const memo = $(`memo-${id}`);
+  if (!S.dirty.has(id) && document.activeElement !== memo) memo.value = (S.reviews.get(id) || {}).memo || "";
+  const cell = document.querySelector(`#bar a[data-id="${id}"]`);
+  cell.classList.toggle("ok", st === "ok"); cell.classList.toggle("fix", st === "fix");
+}
+
+function applyAll() {
+  let ok = 0, fix = 0;
+  for (const id of S.cuts.keys()) { applyOne(id); const st = statusOf(id); if (st === "ok") ok++; if (st === "fix") fix++; }
+  $("n-ok").textContent = ok; $("n-fix").textContent = fix; $("n-todo").textContent = S.cuts.size - ok - fix;
+  S.data.sections.forEach((sec, i) => {
+    const n = sec.cuts.filter((c) => statusOf(c.id) === "fix").length;
+    $(`ix-fix-${i + 1}`).textContent = n ? ` · 고칠 것 ${n}` : "";
+  });
+  applyFilter();
+}
+
+function applyFilter() {
+  const f = S.filter; let shown = 0;
+  for (const b of document.querySelectorAll(".filters button")) b.setAttribute("aria-pressed", String(b.dataset.f === f));
+  document.querySelectorAll("section.part").forEach((part) => {
+    let any = false;
+    part.querySelectorAll("article.cut").forEach((art) => {
+      const st = statusOf(art.id);
+      const show = f === "all" || (f === "todo" ? !st : st === f);
+      art.hidden = !show; if (show) { any = true; shown++; }
+    });
+    part.hidden = !any;
+  });
+  $("empty").hidden = shown > 0;
+}
+
+function setStatus(id, st) {
+  const r = { ...(S.reviews.get(id) || {}), status: st };
+  S.reviews.set(id, r); applyAll(); write(id);
+}
+function onMemo(id, value) {
+  S.dirty.add(id);
+  S.reviews.set(id, { ...(S.reviews.get(id) || {}), memo: value });
+  clearTimeout(S.timers.get(id));
+  S.timers.set(id, setTimeout(() => flushMemo(id, false), 900));
+  $(`save-${id}`).textContent = "입력 중";
+}
+function flushMemo(id, done) {
+  if (!S.dirty.has(id)) return;
+  clearTimeout(S.timers.get(id)); S.timers.delete(id);
+  write(id);
+  if (done) S.dirty.delete(id);
+}
+
+function write(id) {
+  if (!S.db || !S.canWrite) return;
+  const r = S.reviews.get(id) || {};
+  const body = { status: r.status || "", memo: r.memo || "", text: S.cuts.get(id).text, updatedAt: new Date().toISOString() };
+  const ref = S.db.doc("reviews/" + id);
+  const empty = !body.status && !body.memo.trim();
+  const save = $(`save-${id}`); save.textContent = "저장 중";
+  const prev = S.queues.get(id) || Promise.resolve();
+  const p = prev.catch(() => {}).then(() => (empty ? ref.delete() : ref.set(body))).then(
+    () => { if (S.queues.get(id) === p) save.textContent = "저장됨"; },
+    (e) => {
+      save.textContent = "저장하지 못했습니다";
+      if (e && e.code === "invalid_argument") { S.canWrite = false; lock("이 계정은 검토 표시를 저장할 수 없습니다. 보기 권한만 있습니다."); }
+      else if (e && e.code === "quota_exceeded") setNote("저장 공간이 가득 찼습니다. 메모를 줄여 주세요.");
+    });
+  S.queues.set(id, p);
+}
+
+function setNote(t) { $("dbnote").textContent = t; }
+function lock(msg) {
+  document.querySelectorAll(".seg button").forEach((b) => (b.disabled = true));
+  document.querySelectorAll(".review textarea").forEach((t) => (t.readOnly = true));
+  if (msg) setNote(msg);
+}
+function unlock() {
+  document.querySelectorAll(".seg button").forEach((b) => (b.disabled = false));
+  document.querySelectorAll(".review textarea").forEach((t) => (t.readOnly = false));
+}
+
+async function connect() {
+  const c = window.claude;
+  if (!c || typeof c.use !== "function") { lock("검토 표시는 claude.ai에서 이 페이지를 열었을 때 저장됩니다."); return; }
+  const timer = setTimeout(() => setNote("검토 기록을 아직 불러오지 못했습니다. 연결을 확인해 주세요."), 10000);
+  const db = await c.use("db");
+  if (!db) { clearTimeout(timer); lock("이 화면에서는 검토 표시를 저장할 수 없습니다. 로그인한 claude.ai에서 열어 주세요."); return; }
+  S.db = db; S.canWrite = true;
+  try { const user = await c.use("user"); if (user && (await user.can("data.write")) === false) S.canWrite = false; } catch (e) {}
+  if (S.canWrite) unlock(); else lock("보기 권한이라 검토 표시를 바꿀 수 없습니다.");
+  db.collection("reviews").onSnapshot((snap) => {
+    if (!snap.metadata.fromCache) { clearTimeout(timer); if (S.canWrite) setNote("표시와 메모는 바로 저장됩니다."); }
+    const m = new Map();
+    for (const d of snap.docs) if (d.exists) m.set(d.id, { ...d.data() });
+    for (const id of S.dirty) { const local = S.reviews.get(id); if (local) m.set(id, { ...(m.get(id) || {}), memo: local.memo }); }
+    S.reviews = m; applyAll();
+  }, () => { clearTimeout(timer); setNote("검토 기록을 불러오지 못했습니다. 페이지를 다시 열어 주세요."); });
+}
+
+document.querySelectorAll(".filters button").forEach((b) => b.addEventListener("click", () => { S.filter = b.dataset.f; applyFilter(); }));
+$("bar").addEventListener("click", (e) => {  // 걸러서 숨은 컷을 막대에서 누르면 전체 보기로 돌아간다
+  const a = e.target.closest("a"); if (a && $(a.dataset.id).hidden) { S.filter = "all"; applyFilter(); }
+});
+
+(async function main() {
+  try {
+    const r = await fetch("conti.json"); if (!r.ok) throw new Error(r.status);
+    S.data = await r.json();
+  } catch (e) {
+    $("cuts").append(el("p", "err", "콘티 데이터(conti.json)를 불러오지 못했습니다. 페이지를 다시 열어 주세요."));
+    $("facts").textContent = ""; setNote(""); return;
+  }
+  render(S.data); applyAll();
+  if (location.hash && document.getElementById(location.hash.slice(1))) document.getElementById(location.hash.slice(1)).scrollIntoView();
+  connect();
+})();
+</script>

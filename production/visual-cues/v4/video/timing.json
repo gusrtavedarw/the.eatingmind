@@ -1,0 +1,425 @@
+{
+ "total": 58.775,
+ "cuts": {
+  "C01": {
+   "start": 0.0,
+   "voice_start": 1.0,
+   "voice_dur": 3.259,
+   "dur": 4.759
+  },
+  "C02": {
+   "start": 4.759,
+   "voice_start": 4.759,
+   "voice_dur": 2.132,
+   "dur": 2.282
+  },
+  "C03": {
+   "start": 7.041,
+   "voice_start": 7.041,
+   "voice_dur": 1.527,
+   "dur": 1.827
+  },
+  "C04": {
+   "start": 8.868,
+   "voice_start": 8.868,
+   "voice_dur": 0.0,
+   "dur": 2.0
+  },
+  "C05": {
+   "start": 10.868,
+   "voice_start": 10.868,
+   "voice_dur": 10.926,
+   "dur": 11.526
+  },
+  "C06": {
+   "start": 22.394,
+   "voice_start": 22.394,
+   "voice_dur": 7.831,
+   "dur": 9.031
+  },
+  "C07": {
+   "start": 31.425,
+   "voice_start": 31.425,
+   "voice_dur": 2.161,
+   "dur": 2.311
+  },
+  "C08": {
+   "start": 33.736,
+   "voice_start": 33.736,
+   "voice_dur": 1.979,
+   "dur": 2.979
+  },
+  "C09": {
+   "start": 36.715,
+   "voice_start": 36.715,
+   "voice_dur": 4.674,
+   "dur": 5.474
+  },
+  "C10": {
+   "start": 42.188,
+   "voice_start": 42.188,
+   "voice_dur": 5.565,
+   "dur": 6.165
+  },
+  "C11": {
+   "start": 48.353,
+   "voice_start": 48.353,
+   "voice_dur": 8.922,
+   "dur": 10.422
+  }
+ },
+ "captions": [
+  {
+   "cut": "C01",
+   "text": "봉지의 마지막 남은 과자를 집었을 때, 깜짝 놀랐습니다",
+   "start": 0.98,
+   "end": 4.47
+  },
+  {
+   "cut": "C02",
+   "text": "혹시나 하고 한 번 더 손을 넣어보지만",
+   "start": 4.739,
+   "end": 6.951
+  },
+  {
+   "cut": "C03",
+   "text": "역시나 다 먹었습니다",
+   "start": 6.971,
+   "end": 8.781
+  },
+  {
+   "cut": "C05",
+   "text": "별로 좋아하지 않는 과자인 데다",
+   "start": 11.248,
+   "end": 13.312
+  },
+  {
+   "cut": "C05",
+   "text": "누군가 먹다 놔둔 과자라서 첫 입은 조금 눅눅한 맛이었던 것 같습니다",
+   "start": 13.332,
+   "end": 17.688
+  },
+  {
+   "cut": "C05",
+   "text": "솔직히 그다음부터는 무슨 맛인지 잘 기억이 나지 않습니다",
+   "start": 18.288,
+   "end": 21.998
+  },
+  {
+   "cut": "C06",
+   "text": "그렇게 맛있지도 않았는데",
+   "start": 22.364,
+   "end": 24.234
+  },
+  {
+   "cut": "C06",
+   "text": "그만 먹겠다는 생각 자체가 나지 않았습니다",
+   "start": 24.274,
+   "end": 27.064
+  },
+  {
+   "cut": "C06",
+   "text": "기계적으로 과자를 집어 먹었던 것 같습니다",
+   "start": 27.604,
+   "end": 30.444
+  },
+  {
+   "cut": "C07",
+   "text": "봉지에 과자가 조금 더 남아 있었다면",
+   "start": 31.415,
+   "end": 33.696
+  },
+  {
+   "cut": "C08",
+   "text": "같은 순간에 손을 멈췄을까요?",
+   "start": 33.716,
+   "end": 35.926
+  },
+  {
+   "cut": "C09",
+   "text": "아니면 계속 집어먹었을까요?",
+   "start": 37.055,
+   "end": 38.935
+  },
+  {
+   "cut": "C09",
+   "text": "그렇게 맛있지도 않았는데 말이죠…",
+   "start": 39.465,
+   "end": 41.605
+  },
+  {
+   "cut": "C10",
+   "text": "먹는 마음을 이해하고, 나를 돌보는 지식",
+   "start": 42.178,
+   "end": 44.768
+  },
+  {
+   "cut": "C10",
+   "text": "안녕하세요, 먹는마음의 구스타브입니다",
+   "start": 45.438,
+   "end": 47.968
+  },
+  {
+   "cut": "C11",
+   "text": "오늘은 그 질문에서 한 가지를 살펴보겠습니다",
+   "start": 48.333,
+   "end": 51.263
+  },
+  {
+   "cut": "C11",
+   "text": "먹은 만큼 음식이 줄어드는 모습",
+   "start": 51.783,
+   "end": 53.793
+  },
+  {
+   "cut": "C11",
+   "text": "그 모습이 달라지면, 우리가 먹는 양도 달라질까요?",
+   "start": 54.313,
+   "end": 57.483
+  }
+ ],
+ "audio": [
+  {
+   "id": "v-C01",
+   "src": "assets/voice/C01.wav",
+   "start": 1.0,
+   "dur": 3.259,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C02",
+   "src": "assets/voice/C02.wav",
+   "start": 4.759,
+   "dur": 2.132,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C03",
+   "src": "assets/voice/C03.wav",
+   "start": 7.041,
+   "dur": 1.527,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C05",
+   "src": "assets/voice/C05.wav",
+   "start": 10.868,
+   "dur": 10.926,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C06",
+   "src": "assets/voice/C06.wav",
+   "start": 22.394,
+   "dur": 7.831,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C07",
+   "src": "assets/voice/C07.wav",
+   "start": 31.425,
+   "dur": 2.161,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C08",
+   "src": "assets/voice/C08.wav",
+   "start": 33.736,
+   "dur": 1.979,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C09",
+   "src": "assets/voice/C09.wav",
+   "start": 36.715,
+   "dur": 4.674,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C10",
+   "src": "assets/voice/C10.wav",
+   "start": 42.188,
+   "dur": 5.565,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "v-C11",
+   "src": "assets/voice/C11.wav",
+   "start": 48.353,
+   "dur": 8.922,
+   "vol": 0.74,
+   "media": 0.0,
+   "fin": 0.0,
+   "fout": 0.0,
+   "lane": 10
+  },
+  {
+   "id": "tv-1",
+   "src": "assets/sfx/tv_a.mp3",
+   "start": 0,
+   "dur": 9.418,
+   "vol": 1.186,
+   "media": 0,
+   "fin": 1.0,
+   "fout": 0.3,
+   "lane": 12
+  },
+  {
+   "id": "tv-2",
+   "src": "assets/sfx/tv_a.mp3",
+   "start": 9.118,
+   "dur": 1.9,
+   "vol": 0.178,
+   "media": 9.118,
+   "fin": 0.3,
+   "fout": 0.3,
+   "lane": 13
+  },
+  {
+   "id": "tv-3",
+   "src": "assets/sfx/tv_a.mp3",
+   "start": 10.718,
+   "dur": 20.707,
+   "vol": 1.186,
+   "media": 10.718,
+   "fin": 0.4,
+   "fout": 0.6,
+   "lane": 12
+  },
+  {
+   "id": "drone",
+   "src": "assets/sfx/drone_a.mp3",
+   "start": 30.825,
+   "dur": 27.95,
+   "vol": 0.124,
+   "media": 6.0,
+   "fin": 1.0,
+   "fout": 1.0,
+   "lane": 14
+  },
+  {
+   "id": "bag-c02",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 4.759,
+   "dur": 0.95,
+   "vol": 0.35,
+   "media": 0.25,
+   "fin": 0.02,
+   "fout": 0.15,
+   "lane": 11
+  },
+  {
+   "id": "bag-c03",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 7.091,
+   "dur": 0.45,
+   "vol": 0.38,
+   "media": 2.1,
+   "fin": 0.02,
+   "fout": 0.03,
+   "lane": 11
+  },
+  {
+   "id": "bag-c04",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 8.868,
+   "dur": 0.8,
+   "vol": 0.312,
+   "media": 4.8,
+   "fin": 0.02,
+   "fout": 0.15,
+   "lane": 11
+  },
+  {
+   "id": "bag-c06a",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 22.694,
+   "dur": 0.5,
+   "vol": 0.9,
+   "media": 11.85,
+   "fin": 0.02,
+   "fout": 0.1,
+   "lane": 11
+  },
+  {
+   "id": "bag-c06b",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 24.694,
+   "dur": 0.6,
+   "vol": 0.489,
+   "media": 13.35,
+   "fin": 0.02,
+   "fout": 0.1,
+   "lane": 11
+  },
+  {
+   "id": "bag-c06c",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 26.694,
+   "dur": 0.55,
+   "vol": 0.757,
+   "media": 16.55,
+   "fin": 0.02,
+   "fout": 0.1,
+   "lane": 11
+  },
+  {
+   "id": "bag-c06d",
+   "src": "assets/sfx/bag_b.mp3",
+   "start": 28.694,
+   "dur": 0.55,
+   "vol": 1.094,
+   "media": 17.3,
+   "fin": 0.02,
+   "fout": 0.1,
+   "lane": 11
+  },
+  {
+   "id": "crunch-c09",
+   "src": "assets/sfx/crunch_a.mp3",
+   "start": 36.915,
+   "dur": 1.2,
+   "vol": 0.358,
+   "media": 0,
+   "fin": 0.0,
+   "fout": 0.3,
+   "lane": 11
+  }
+ ]
+}
