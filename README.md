@@ -10,8 +10,8 @@
 
 > 먹기를 끝내는 판단에는, 몸의 느낌과 눈앞에 보이는 음식의 양이 함께 영향을 준다.
 
-- [11월 22일 전체 녹음 대본](production/visual-cues/v4/내레이션_녹음용.txt) · 빈 과자 봉지로 시작하는 원고, 예상 낭독 약 7분 30초
-- [11월 22일 제작 메모](production/visual-cues/v4/제작메모.md) · 예상 시간, 화면 지시, 연구 출처
+- [11월 22일 전체 녹음 대본](production/soup-popcorn/내레이션_녹음용.txt) · 빈 과자 봉지로 시작하는 원고, 예상 낭독 약 7분 30초
+- [11월 22일 제작 메모](production/soup-popcorn/제작메모.md) · 예상 시간, 화면 지시, 연구 출처
 - 11월 9일 개정안 · [녹음 대본](production/visual-cues/v3/내레이션_녹음용.txt) · [제작 메모](production/visual-cues/v3/제작메모.md)
 - [전체 정리](production/먹는마음_전체정리_2026-11-06.md): 채널 정체성, 확정 사항, 보류 사항과 다음 작업(11월 6일 기준)
 - [확정 브리프](production/visual-cues/episode_brief.md): 현재 편의 시청자·메시지·감정 흐름·연구 검증 비중

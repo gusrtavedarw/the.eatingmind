@@ -1,7 +1,7 @@
 # 수프·팝콘 편 콘티를 만든다: 콘티.md와 검토 페이지 데이터(review/conti.json, 그린 컷은 review/img/<컷>.jpg).
 # 컷마다 읽는 문장의 한글 음절로 시간을 계산하고(분당 265음절), 컷 문장을 이어 붙인 것이 녹음 대본 본문과 같은지 확인한다.
 # 콘티를 고칠 때는 아래 S(컷 데이터)와 RULES(정한 것)만 고치고 다시 실행한다. 검토 페이지(review/index.html)는 conti.json을 읽는다.
-# 실행: python3 production/visual-cues/v4/make_conti.py
+# 실행: python3 production/soup-popcorn/storyboard/make_conti.py
 import json, os, re, sys
 from PIL import Image
 
@@ -303,7 +303,7 @@ def review_img(cid):
         Image.open(src).convert("RGB").resize((1280, 720), Image.LANCZOS).save(dst, quality=84)
     return f"img/{cid}.jpg"
 
-lines = open(os.path.join(HERE, "내레이션_녹음용.txt"), encoding="utf-8").read().splitlines()[3:]
+lines = open(os.path.join(HERE, "..", "내레이션_녹음용.txt"), encoding="utf-8").read().splitlines()[3:]
 body = norm(" ".join(l for l in lines if l.strip() and not l.strip().startswith("[")))
 cuts_text = norm(" ".join(c[2] for _, cs in S for c in cs if c[2]))
 if body != cuts_text:
@@ -342,7 +342,7 @@ print("2.5초 미만:", [(c, round(d, 1)) for c, d in lens if d < 2.5]); print("
 
 head = f"""# 먹는마음 · 수프·팝콘 편 화면 콘티 (v1)
 
-2026-11-22 grill-me로 정한 기준에 따라 [녹음 대본](내레이션_녹음용.txt)을 {n}컷으로 나눈 글 콘티입니다. 그림체는 [그림체 가이드](../../style/style_guide.md)를 따릅니다. 그린 컷({'·'.join(drawn) or '없음'})은 [비교 화면](cuts/compare.jpg)에서 볼 수 있습니다. 이 문서와 [검토 페이지](review/index.html)는 [make_conti.py](make_conti.py)가 같은 컷 데이터로 함께 만듭니다.
+2026-11-22 grill-me로 정한 기준에 따라 [녹음 대본](../내레이션_녹음용.txt)을 {n}컷으로 나눈 글 콘티입니다. 그림체는 [그림체 가이드](../../style/style_guide.md)를 따릅니다. 그린 컷({'·'.join(drawn) or '없음'})은 [비교 화면](cuts/compare.jpg)에서 볼 수 있습니다. 이 문서와 [검토 페이지](review/index.html)는 [make_conti.py](make_conti.py)가 같은 컷 데이터로 함께 만듭니다.
 
 **{n}컷 · 약 {mmss(t)}(마지막 화면 {END_SCREEN:.0f}초 포함) · 컷 평균 {t / n:.1f}초 · 화면 가득 {nfull}컷, 종이 위 오브제 {n - nfull}컷**
 
