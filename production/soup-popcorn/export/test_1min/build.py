@@ -7,9 +7,9 @@ import numpy as np, soundfile as sf
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-V4 = os.path.dirname(HERE)
-VOICE = os.path.expanduser("~/Documents/claude-work/voice/gustave/out/final")
-SOUNDS = os.path.expanduser("~/Documents/claude-work/voice/gustave/sounds")
+EP = os.path.dirname(os.path.dirname(HERE))  # production/soup-popcorn
+VOICE = os.path.join(EP, "recording", "out", "final")
+SOUNDS = os.path.join(EP, "recording", "sounds")
 FONT = os.path.expanduser("~/Library/Fonts/Pretendard-Medium.otf")
 A = os.path.join(HERE, "assets")
 CUTS = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10", "C11"]
@@ -39,7 +39,7 @@ def gain(target, measured): return round(min(3.98, 10 ** ((target - measured) / 
 # 1) 자산 복사
 for d in ("img", "voice", "sfx", "fonts"): os.makedirs(f"{A}/{d}", exist_ok=True)
 for c in CUTS:
-    dst = f"{A}/img/{c}.jpg"; src = f"{V4}/cuts/{c}_paper.png"
+    dst = f"{A}/img/{c}.jpg"; src = f"{EP}/storyboard/cuts/{c}_paper.png"
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
         Image.open(src).convert("RGB").resize((1920, 1080), Image.LANCZOS).save(dst, quality=92)
     if c not in SILENT: shutil.copy2(f"{VOICE}/{c}.wav", f"{A}/voice/{c}.wav")
@@ -48,7 +48,7 @@ for key in ("bag_b", "crunch_a", "tv_a", "drone_a"):
 shutil.copy2(FONT, f"{A}/fonts/Pretendard-Medium.otf")
 
 # 2) 컷 시간
-cuts = {c["id"]: c for s in json.load(open(f"{V4}/review/conti.json"))["sections"] for c in s["cuts"]}
+cuts = {c["id"]: c for s in json.load(open(f"{EP}/storyboard/review/conti.json"))["sections"] for c in s["cuts"]}
 t, T = 0.0, {}
 for c in CUTS:
     lead = LEAD.get(c, 0.0)

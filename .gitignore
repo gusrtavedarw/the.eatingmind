@@ -5,17 +5,20 @@ production/style/tests/**/*.log
 production/style/tests/**/*.check.txt
 
 # 콘티 컷 그림: 낱장 그림·로그·검수 결과는 올리지 않는다(비교 화면과 프롬프트만 올림)
-production/visual-cues/v4/cuts/*.png
-production/visual-cues/v4/cuts/*.log
-production/visual-cues/v4/cuts/*.check.txt
-production/visual-cues/v4/review/img/
+production/soup-popcorn/storyboard/cuts/*.png
+production/soup-popcorn/storyboard/cuts/*.log
+production/soup-popcorn/storyboard/cuts/*.check.txt
+production/soup-popcorn/storyboard/review/img/
 # 1분 시험 영상(HyperFrames): 그림·음성·음원·글꼴 자산과 렌더 결과는 올리지 않는다(Pixabay 음원·본인 목소리 포함). 코드만 올림
-production/visual-cues/v4/video/assets/
-production/visual-cues/v4/video/renders/
-production/visual-cues/v4/video/snapshots/
-production/visual-cues/v4/video/node_modules/
-production/visual-cues/v4/video/AGENTS.md
-production/visual-cues/v4/video/CLAUDE.md
-production/visual-cues/v4/video/.hyperframes/
-production/visual-cues/v4/video/.thumbnails/
-production/visual-cues/v4/video/.waveform-cache/
+production/soup-popcorn/export/test_1min/assets/
+production/soup-popcorn/export/test_1min/renders/
+production/soup-popcorn/export/test_1min/snapshots/
+production/soup-popcorn/export/test_1min/node_modules/
+production/soup-popcorn/export/test_1min/AGENTS.md
+production/soup-popcorn/export/test_1min/CLAUDE.md
+production/soup-popcorn/export/test_1min/.hyperframes/
+production/soup-popcorn/export/test_1min/.thumbnails/
+production/soup-popcorn/export/test_1min/.waveform-cache/
+# 녹음: 내레이션 음성(out/)과 받은 음원은 올리지 않는다(본인 목소리·Pixabay 음원). 스크립트와 음원 출처(sounds/출처.md)만 올림
+production/soup-popcorn/recording/out/
+production/soup-popcorn/recording/sounds/*.mp3

@@ -1,7 +1,7 @@
 # 콘티(콘티.md)의 컷 그림을 gpt-image-2(codex, tools/gen-ref.sh)로 그린다 → cuts/
 # 그림체 문구는 production/style/make_tests.py에서 가져온다(세 번째 사본을 만들지 않음). 순서는 style_guide.md "앞으로 그릴 때"를 따른다.
 # 컷마다: 그리기(<컷>.png) → 종이 질감 세기 2(<컷>_paper.png, 본 컷) → 검수(<컷>.check.txt) → 마지막에 비교 화면(compare.jpg, 저장소 기록이 덜 늘게 JPEG).
-# 실행: python3 production/visual-cues/v4/make_cuts.py [C01 C14 ...]   (이미 있는 파일은 건너뛴다. 다시 그리려면 그 컷의 png를 지운다)
+# 실행: python3 production/soup-popcorn/storyboard/make_cuts.py [C01 C14 ...]   (이미 있는 파일은 건너뛴다. 다시 그리려면 그 컷의 png를 지운다)
 import os, subprocess, sys
 from concurrent.futures import ThreadPoolExecutor
 from PIL import Image, ImageDraw, ImageFont
