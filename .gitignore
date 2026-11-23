@@ -22,3 +22,5 @@ production/soup-popcorn/export/test_1min/.waveform-cache/
 # 녹음: 내레이션 음성(out/)과 받은 음원은 올리지 않는다(본인 목소리·Pixabay 음원). 스크립트와 음원 출처(sounds/출처.md)만 올림
 production/soup-popcorn/recording/out/
 production/soup-popcorn/recording/sounds/*.mp3
+# 드라이브 보관 도구(tools/archive_task.py)의 진행 기록
+.claude/archive_*.state.json
