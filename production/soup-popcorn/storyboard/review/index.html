@@ -3,9 +3,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
-<!-- 먹는마음 수프·팝콘 편 콘티 검토 페이지. 데이터는 같은 폴더의 conti.json(make_conti.py가 만듦), 검토 표시는 db의 reviews/<컷> 문서. -->
+<!-- 먹는마음 수프·팝콘 편 샷 리스트 검토 페이지(작업 2단계). 데이터는 같은 폴더의 shots.json(shotlist/make_shots.py가 만듦), 검토 표시는 db의 shots/<샷> 문서. -->
 <style>
-/* 레이아웃: 콘티 시트. 위에 전체 길이 시간 막대(컷마다 한 칸, 검토 상태 색)와 구간 목차, 아래로 구간별 컷 행: 왼쪽 16:9 그림 칸, 오른쪽 읽는 문장·컷 정보·검토 표시 */
+/* 레이아웃: 샷 시트. 위에 전체 길이 시간 막대(샷마다 한 칸, 검토 상태 색)와 구간 목차, 아래로 구간 → 장면 머리줄 → 샷 행: 왼쪽 16:9 그림 칸, 오른쪽 읽는 문장·샷 정보·검토 표시 */
 :root {
   --bg: #F2F1EE; --surface: #FBFAF8; --ink: #1B1A18; --muted: #68645C; --line: #DAD6CD;
   --paper: #EEE6D3; --paper-ink: #4A4436;
@@ -95,6 +95,11 @@ details.rules summary { cursor: pointer; padding-block: 12px; font-weight: 500; 
 section.part { scroll-margin-top: 72px; }
 .part h2 { font-family: var(--f-line); font-weight: 700; font-size: 22px; margin: 40px 0 0; text-wrap: balance; }
 .part .pmeta { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin: 2px 0 4px; font-variant-numeric: tabular-nums; }
+.scene-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 26px 0 0; padding-top: 10px; border-top: 2px solid var(--ink); font-size: 13px; color: var(--muted); }
+.scene-h b { font-family: var(--f-mono); font-weight: 500; font-size: 14px; color: var(--ink); }
+.scene-h + .cut { border-top: 0; }
+.src { font-family: var(--f-body); font-size: 12px; padding: 0 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); }
+.src.drawn { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
 .cut {
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px; align-items: start;
@@ -147,16 +152,16 @@ dd.accent::before { content: ""; display: inline-block; width: 9px; height: 9px;
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">먹는마음 · 화면 콘티 검토</div>
+    <div class="eyebrow">먹는마음 · 샷 리스트 검토 · 작업 2단계</div>
     <h1>수프·팝콘 편 콘티</h1>
-    <p class="facts" id="facts">콘티를 불러오는 중입니다.</p>
-    <p class="how">컷마다 그림 칸과 읽는 문장을 보고 <b>좋음</b> 또는 <b>고칠 것</b>을 고른 뒤, 고칠 점을 메모로 남겨 주세요. 표시와 메모는 바로 저장되고, Claude가 읽어 콘티에 반영합니다. 시간은 녹음 전 예상치입니다.</p>
+    <p class="facts" id="facts">샷 리스트를 불러오는 중입니다.</p>
+    <p class="how">샷마다 그림 칸과 읽는 문장을 보고 <b>좋음</b> 또는 <b>고칠 것</b>을 고른 뒤, 고칠 점을 메모로 남겨 주세요. 표시와 메모는 바로 저장되고, Claude가 읽어 샷 리스트에 반영합니다. 그림 칸이 비어 있는 샷은 3단계에서 새로 그립니다.</p>
   </header>
 
   <div class="timeline" aria-label="전체 시간 막대">
     <div class="bar" id="bar"></div>
     <div class="scale" id="scale"></div>
-    <div class="legend"><span><i></i>안 본 컷</span><span><i class="ok"></i>좋음</span><span><i class="fix"></i>고칠 것</span><span><i class="drawn"></i>그림 있음(아래 줄)</span></div>
+    <div class="legend"><span><i></i>안 본 샷</span><span><i class="ok"></i>좋음</span><span><i class="fix"></i>고칠 것</span><span><i class="drawn"></i>이미 그린 그림(아래 줄)</span></div>
   </div>
   <nav class="index" id="index" aria-label="구간 목차"></nav>
   <p class="note" id="note"></p>
@@ -167,9 +172,9 @@ dd.accent::before { content: ""; display: inline-block; width: 9px; height: 9px;
   </details>
 
   <div class="toolbar">
-    <div class="filters" role="group" aria-label="컷 거르기">
+    <div class="filters" role="group" aria-label="샷 거르기">
       <button type="button" id="f-all" data-f="all" aria-pressed="true">전체<span id="n-all">0</span></button>
-      <button type="button" id="f-todo" data-f="todo" aria-pressed="false">안 본 컷<span id="n-todo">0</span></button>
+      <button type="button" id="f-todo" data-f="todo" aria-pressed="false">안 본 샷<span id="n-todo">0</span></button>
       <button type="button" id="f-fix" data-f="fix" aria-pressed="false">고칠 것<span id="n-fix">0</span></button>
       <button type="button" id="f-ok" data-f="ok" aria-pressed="false">좋음<span id="n-ok">0</span></button>
     </div>
@@ -177,7 +182,7 @@ dd.accent::before { content: ""; display: inline-block; width: 9px; height: 9px;
   </div>
 
   <main id="cuts"></main>
-  <p class="empty" id="empty" hidden>이 조건에 맞는 컷이 없습니다.</p>
+  <p class="empty" id="empty" hidden>이 조건에 맞는 샷이 없습니다.</p>
 </div>
 
 <script>
@@ -200,13 +205,13 @@ const statusOf = (id) => (S.reviews.get(id) || {}).status || "";
 
 function render(d) {
   const facts = $("facts"); facts.textContent = "";
-  for (const [a, v, b] of [["", d.cuts, "컷"], ["약 ", d.total_mmss, ` (마지막 화면 ${d.end_screen}초 포함)`], ["컷 평균 ", d.avg.toFixed(1), "초"],
-                           ["화면 가득 ", d.full, ""], ["종이 위 오브제 ", d.obj, ""], ["그린 컷 ", d.drawn.length, ""]]) {
+  for (const [a, v, b] of [["", d.shots, "샷"], ["장면 ", d.scenes, ""], ["약 ", d.total_mmss, " (마지막 화면 10초 포함)"], ["샷 평균 ", d.avg.toFixed(1), "초"],
+                           ["이미 그린 그림 ", d.drawn, ""], ["새로 그릴 그림 ", d.new, ""], ["화면 가득 ", d.full, ""], ["종이 위 오브제 ", d.obj, ""]]) {
     const s = el("span"); s.append(a, el("b", null, String(v)), b); facts.append(s);
   }
-  $("n-all").textContent = d.cuts;
+  $("n-all").textContent = d.shots;
 
-  // 시간 막대: 구간마다 한 묶음, 컷마다 한 칸(길이 비례)
+  // 시간 막대: 구간마다 한 묶음, 샷마다 한 칸(길이 비례)
   const bar = $("bar");
   d.sections.forEach((sec, i) => {
     const g = el("div", "sec"); g.style.flex = `${sec.secs} 1 0`;
@@ -225,20 +230,24 @@ function render(d) {
   d.sections.forEach((sec, i) => {
     const a = el("a"); a.href = `#part-${i + 1}`;
     a.append(el("span", "nm", sec.name));
-    const tm = el("span", "tm", `${sec.start}–${sec.end} · ${sec.cuts.length}컷`); const em = el("em"); em.id = `ix-fix-${i + 1}`; tm.append(em);
+    const tm = el("span", "tm", `${sec.start}–${sec.end} · ${sec.cuts.length}샷`); const em = el("em"); em.id = `ix-fix-${i + 1}`; tm.append(em);
     a.append(tm); index.append(a);
   });
-  $("note").textContent = d.note;
+  $("note").textContent = `시간은 1분 시험 영상의 실제 내레이션 속도(콘티 예상의 ${d.ratio}배)로 맞춘 예상치입니다. 전체 녹음 뒤 실제 길이로 다시 맞춥니다.`;
 
   const rb = $("rulesBody");
-  for (const [k, v] of d.rules) { const tr = el("tr"); tr.append(el("th", null, k)); const td = el("td"); td.append(rich(v)); tr.append(td); rb.append(tr); }
-  $("rules").querySelector("summary").textContent = `정한 것 (${d.rules.length}가지)`;
+  for (const [k, v] of d.notes) { const tr = el("tr"); tr.append(el("th", null, k)); const td = el("td"); td.append(rich(v)); tr.append(td); rb.append(tr); }
+  $("rules").querySelector("summary").textContent = `정한 것 (${d.notes.length}가지)`;
 
   const main = $("cuts");
   d.sections.forEach((sec, i) => {
     const part = el("section", "part"); part.id = `part-${i + 1}`;
-    part.append(el("h2", null, sec.name), el("p", "pmeta", `${sec.start}–${sec.end} · ${Math.round(sec.secs)}초 · ${sec.cuts.length}컷`));
-    for (const c of sec.cuts) { S.cuts.set(c.id, c); part.append(renderCut(c)); }
+    part.append(el("h2", null, sec.name), el("p", "pmeta", `${sec.start}–${sec.end} · ${Math.round(sec.secs)}초 · 장면 ${sec.scenes.length}개 · ${sec.cuts.length}샷`));
+    for (const x of sec.scenes) {
+      const h = el("div", "scene-h"); h.id = x.id; h.append(el("b", null, `장면 ${x.id}`), el("span", null, x.shots.length > 1 ? `${x.shots.length}샷으로 나눔` : "1샷"));
+      part.append(h);
+      for (const c of x.shots) { S.cuts.set(c.id, c); part.append(renderCut(c)); }
+    }
     main.append(part);
   });
 }
@@ -255,7 +264,8 @@ function renderCut(c) {
   }
 
   const body = el("div", "cbody");
-  const tc = el("div", "tc"); tc.append(el("span", null, `${c.start}–${c.end}`), el("span", null, `${c.dur.toFixed(1)}초`));
+  const tc = el("div", "tc"); tc.append(el("span", null, `${c.start}–${c.end}`), el("span", null, `${c.dur.toFixed(1)}초`),
+    el("span", null, c.part === "1/1" ? c.scene : `${c.scene} · ${c.part}`), el("span", c.src === "drawn" ? "src drawn" : "src", c.src_label));
   const pill = el("span", "pill"); pill.hidden = true; tc.append(pill);
   body.append(tc);
   body.append(c.text ? el("p", "line", c.text) : el("p", "line silent", "(읽지 않음 · 마지막 화면)"));
@@ -344,8 +354,8 @@ function flushMemo(id, done) {
 function write(id) {
   if (!S.db || !S.canWrite) return;
   const r = S.reviews.get(id) || {};
-  const body = { status: r.status || "", memo: r.memo || "", text: S.cuts.get(id).text, updatedAt: new Date().toISOString() };
-  const ref = S.db.doc("reviews/" + id);
+  const body = { status: r.status || "", memo: r.memo || "", scene: S.cuts.get(id).scene, text: S.cuts.get(id).text, updatedAt: new Date().toISOString() };
+  const ref = S.db.doc("shots/" + id);
   const empty = !body.status && !body.memo.trim();
   const save = $(`save-${id}`); save.textContent = "저장 중";
   const prev = S.queues.get(id) || Promise.resolve();
@@ -379,7 +389,7 @@ async function connect() {
   S.db = db; S.canWrite = true;
   try { const user = await c.use("user"); if (user && (await user.can("data.write")) === false) S.canWrite = false; } catch (e) {}
   if (S.canWrite) unlock(); else lock("보기 권한이라 검토 표시를 바꿀 수 없습니다.");
-  db.collection("reviews").onSnapshot((snap) => {
+  db.collection("shots").onSnapshot((snap) => {
     if (!snap.metadata.fromCache) { clearTimeout(timer); if (S.canWrite) setNote("표시와 메모는 바로 저장됩니다."); }
     const m = new Map();
     for (const d of snap.docs) if (d.exists) m.set(d.id, { ...d.data() });
@@ -389,16 +399,17 @@ async function connect() {
 }
 
 document.querySelectorAll(".filters button").forEach((b) => b.addEventListener("click", () => { S.filter = b.dataset.f; applyFilter(); }));
-$("bar").addEventListener("click", (e) => {  // 걸러서 숨은 컷을 막대에서 누르면 전체 보기로 돌아간다
+$("bar").addEventListener("click", (e) => {  // 걸러서 숨은 샷을 막대에서 누르면 전체 보기로 돌아간다
   const a = e.target.closest("a"); if (a && $(a.dataset.id).hidden) { S.filter = "all"; applyFilter(); }
 });
 
 (async function main() {
   try {
-    const r = await fetch("conti.json"); if (!r.ok) throw new Error(r.status);
+    const r = await fetch("shots.json"); if (!r.ok) throw new Error(r.status);
     S.data = await r.json();
+    for (const sec of S.data.sections) sec.cuts = sec.scenes.flatMap((x) => x.shots);  // 막대·거르기·세기는 샷 단위
   } catch (e) {
-    $("cuts").append(el("p", "err", "콘티 데이터(conti.json)를 불러오지 못했습니다. 페이지를 다시 열어 주세요."));
+    $("cuts").append(el("p", "err", "샷 리스트 데이터(shots.json)를 불러오지 못했습니다. 페이지를 다시 열어 주세요."));
     $("facts").textContent = ""; setNote(""); return;
   }
   render(S.data); applyAll();
