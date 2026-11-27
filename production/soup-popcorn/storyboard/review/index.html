@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
-<!-- 먹는마음 수프·팝콘 편 샷 리스트 검토 페이지(작업 2단계). 데이터는 같은 폴더의 shots.json(shotlist/make_shots.py가 만듦), 검토 표시는 db의 shots/<샷> 문서. -->
+<!-- 먹는마음 수프·팝콘 편 샷 리스트·샷 그림 검토 페이지(작업 2·3단계). 데이터는 같은 폴더의 shots.json(shotlist/make_shots.py가 만듦), 검토 표시는 db의 shots/<샷> 문서. -->
 <style>
 /* 레이아웃: 샷 시트. 위에 전체 길이 시간 막대(샷마다 한 칸, 검토 상태 색)와 구간 목차, 아래로 구간 → 장면 머리줄 → 샷 행: 왼쪽 16:9 그림 칸, 오른쪽 읽는 문장·샷 정보·검토 표시 */
 :root {
@@ -152,7 +152,7 @@ dd.accent::before { content: ""; display: inline-block; width: 9px; height: 9px;
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">먹는마음 · 샷 리스트 검토 · 작업 2단계</div>
+    <div class="eyebrow">먹는마음 · 샷 검토 · 11월 25일 대본 수정판</div>
     <h1>수프·팝콘 편 콘티</h1>
     <p class="facts" id="facts">샷 리스트를 불러오는 중입니다.</p>
     <p class="how">샷마다 그림 칸과 읽는 문장을 보고 <b>좋음</b> 또는 <b>고칠 것</b>을 고른 뒤, 고칠 점을 메모로 남겨 주세요. 표시와 메모는 바로 저장되고, Claude가 읽어 샷 리스트에 반영합니다. 그림 칸이 비어 있는 샷은 3단계에서 새로 그립니다.</p>
@@ -355,7 +355,7 @@ function write(id) {
   if (!S.db || !S.canWrite) return;
   const r = S.reviews.get(id) || {};
   const body = { status: r.status || "", memo: r.memo || "", scene: S.cuts.get(id).scene, text: S.cuts.get(id).text, updatedAt: new Date().toISOString() };
-  const ref = S.db.doc("shots/" + id);
+  const ref = S.db.doc("shots2/" + id);
   const empty = !body.status && !body.memo.trim();
   const save = $(`save-${id}`); save.textContent = "저장 중";
   const prev = S.queues.get(id) || Promise.resolve();
@@ -389,7 +389,7 @@ async function connect() {
   S.db = db; S.canWrite = true;
   try { const user = await c.use("user"); if (user && (await user.can("data.write")) === false) S.canWrite = false; } catch (e) {}
   if (S.canWrite) unlock(); else lock("보기 권한이라 검토 표시를 바꿀 수 없습니다.");
-  db.collection("shots").onSnapshot((snap) => {
+  db.collection("shots2").onSnapshot((snap) => {
     if (!snap.metadata.fromCache) { clearTimeout(timer); if (S.canWrite) setNote("표시와 메모는 바로 저장됩니다."); }
     const m = new Map();
     for (const d of snap.docs) if (d.exists) m.set(d.id, { ...d.data() });
